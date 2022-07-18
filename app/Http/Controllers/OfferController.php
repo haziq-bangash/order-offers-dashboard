@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Offer;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redis;
 
 class OfferController extends Controller
 {
@@ -16,14 +14,10 @@ class OfferController extends Controller
      */
     public function index()
     {
-        //show all offers
-        $offers = Offer::all();
-        return view('admin.offers', compact('offers'));
-    }
-
-    // add offer form
-    public function addOffer(){
-        return view('admin.add');
+        $offers = Offer::latest()->cursorpaginate(5);
+    
+        return view('admin.offers',compact('offers'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -31,25 +25,9 @@ class OfferController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        //add to database
-        $data = $request->validate([
-            'title' => 'required|min:4',
-            'photo_url' => 'required'
-        ]);
-        Offer::create($data);
-
-        return redirect()->route('admin.offers');
-    }
-
-    // delete an offer from DB
-    public function delete($id){
-        $offer = Offer::find($id);
-
-        $offer->delete();
-
-        return redirect()->route('admin.offers');
+        return view('admin.create');
     }
 
     /**
@@ -60,7 +38,25 @@ class OfferController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'detail' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+  
+        $input = $request->all();
+  
+        if ($image = $request->file('image')) {
+            $destinationPath = 'image/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['image'] = "$profileImage";
+        }
+    
+        Offer::create($input);
+     
+        return redirect()->route('admin.offers')
+                        ->with('success','Offer created successfully.');
     }
 
     /**
@@ -105,6 +101,19 @@ class OfferController extends Controller
      */
     public function destroy(Offer $offer)
     {
-        //
+        $offer->delete();
+     
+        return redirect()->route('admin.offers')
+                        ->with('success','Product deleted successfully');
     }
+
+    // delete an offer from DB
+    public function delete($id){
+        $offer = Offer::find($id);
+
+        $offer->delete();
+
+        return redirect()->route('admin.offers');
+    }
+
 }

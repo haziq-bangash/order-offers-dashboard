@@ -22,22 +22,26 @@ Route::get('/', function () {
 });
 
 // user home
-Route::get('/home', [HomeController::class, 'userIndex'])->name('user.home');
+Route::get('/', [HomeController::class, 'userIndex'])->name('user.home');
 
 // admin home
 Route::get('/admin/dashboard', [HomeController::class, 'adminIndex'])->name('admin.dashboard');
 
-Route::get('/admin/offers', [OfferController::class, 'index'])->name('admin.offers');
+// orders
 
 Route::get('/admin/orders')->name('admin.orders');
 Route::POST('/admin/order/delete/{id}', [OrderController::class, 'delete'])->name('admin.order.delete');
 
-Route::get('/admin/add/offer', [OfferController::class, 'addOffer'])->name('admin.add.offer');
-
 Route::get('admin/orders', [OrderController::class, 'index'])->name('admin.orders');
 
-// delete offer from db
-Route::POST('/admin/offer/delete/{id}', [OfferController::class, 'delete'])->name('admin.offer.delete');
+// offers
 
-// add offer to database
-Route::POST('/admin/offer/add')->name('admin.add');
+Route::resource('admin/offers', OfferController::class);
+
+Route::get('/admin/offers', [OfferController::class, 'index'])->name('admin.offers');
+
+Route::get('admin/offers/create', [OfferController::class, 'create'])->name('offers.create');
+
+Route::POST('/admin/offers/store', [OfferController::class, 'store'])->name('offers.store');
+
+Route::POST('/admin/offer/delete/{id}', [OfferController::class, 'delete'])->name('offers.destroy');
