@@ -45,3 +45,12 @@ Route::get('admin/offers/create', [OfferController::class, 'create'])->name('off
 Route::POST('/admin/offers/store', [OfferController::class, 'store'])->name('offers.store');
 
 Route::POST('/admin/offer/delete/{id}', [OfferController::class, 'delete'])->name('offers.destroy');
+
+// animations
+
+Route::get('/animation', [HomeController::class, 'animation']);
+
+Route::get('/animation_2', [HomeController::class, 'animation_2']);
+
+Route::get('/animation_3', [HomeController::class, 'animation_3']);
+

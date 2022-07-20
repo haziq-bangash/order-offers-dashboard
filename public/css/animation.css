@@ -1,0 +1,132 @@
+body {
+    margin:0;
+    padding:0;
+    /* background: #7c5295; */
+  }
+
+  #animation {
+    /* display: none; */
+  }
+
+  #avatars {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  #avatars #boy{
+    position: absolute;
+    bottom: 0;
+    right: 0px;
+    z-index: -1;
+    height: 50%;
+    animation-name: popup;
+    animation-duration: 1s;
+  }
+
+  #avatars #girl{
+    position: absolute;
+    bottom: 0;
+    left: -50px;
+    z-index: -1;
+    height: 45%;
+    animation-name: popup;
+    animation-duration: 1s;
+  }
+
+  video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+  }
+  
+  canvas {
+    /* width:100%; */
+    /* height:100%; */
+    position:absolute;
+    z-index: -1000;
+    animation-name: popup;
+    animation-duration: 1s;
+  }
+
+  .card {
+    width: fit-content;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -70%);
+    animation-name: scaleup;
+    animation-duration: 2s;
+    transition: all 0.5s ease-in-out;
+    border: none;
+    background: transparent;
+  }
+
+  #yayText {
+    -webkit-animation:fontbulger 2s infinite !important;
+   -moz-animation:fontbulger 2s infinite !important;
+   -o-animation:fontbulger 2s infinite !important;
+   animation:fontbulger 2s infinite !important;
+  }
+
+  @media only screen and (max-width: 600px) {
+    #avatars #boy {
+      display: none;
+    }
+  }
+
+  @keyframes scaleup {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+  }
+
+  @keyframes popup {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+  }
+
+
+  /* text animation */
+
+  @-moz-keyframes fontbulger  {
+    0%, 100% {
+       font-size:80px;
+    }
+    
+    50% {
+       font-size:110px;
+    }
+ 
+ }
+ 
+ @-o-keyframes fontbulger  {
+    0%, 100% {
+       font-size:80px;
+    }
+    
+    50% {
+       font-size:110px;
+    }
+ 
+ }
+ 
+ @keyframes fontbulger  {
+    0%, 100% {
+       font-size:80px;
+    }
+    
+    50% {
+       font-size:110px;
+    }
+} 

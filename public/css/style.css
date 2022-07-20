@@ -1,19 +1,21 @@
+/*  
 .container {
     height: 100vh;
 }
+
+
+
+
+.carousel-item img{
+    height: 600px;
+    width: auto;
+}
+*/
 
 #offers {
     height: 100vh;
 }
 
-#carouselExampleIndicators {
-    height: 100vh !important;
-}
-
-.carousel-inner {
-    height: 90% !important;
-}
-
-.carousel-inner img {
-    object-fit: contain !important;
+.carousel-item{
+    max-height: 100vh;
 }

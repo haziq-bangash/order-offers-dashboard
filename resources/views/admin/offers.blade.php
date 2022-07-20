@@ -1,13 +1,13 @@
 @extends('layout.admin')
 
 @section('content')
-<div class="row">
-<div class="col-lg-8 margin-tb">
+<div class="p-3">
+<div class="my-3">
     <div class="pull-right">
         <a class="btn btn-success" href="{{ route('offers.create') }}"> Create New Offer</a>
     </div>
 </div>
-</div>
+
 
 @if ($message = Session::get('success'))
 <div class="alert alert-success">
@@ -15,7 +15,7 @@
 </div>
 @endif
 
-<table class="table table-bordered">
+<table class="table table-bordered table-hover">
 <tr>
     <th>No</th>
     <th>Image</th>
@@ -41,4 +41,5 @@
 </table>
 
 {!! $offers->links() !!}
+</div>
 @endsection
