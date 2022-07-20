@@ -19,3 +19,7 @@
 .carousel-item{
     max-height: 100vh;
 }
+
+.carousel-item img{
+    aspect-ratio: 1 / 1;
+}
